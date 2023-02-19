@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:food_weather/app/app.locator.dart';
+import 'package:food_weather/app/app.logger.dart';
 import 'package:food_weather/core/exception/exceptions.dart';
 import 'package:stacked_services/stacked_services.dart';
 

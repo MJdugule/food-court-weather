@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:food_weather/app/app.logger.dart';
 import 'package:food_weather/core/constants/app_url.dart';
 
 class APIService {
@@ -76,7 +77,7 @@ class APIService {
       route,
       data:jsonEncode(body),
     );
-    log.v("posting ${response.data} from $baseUrl/$route");
+    log.v("posting ${response.data} from ${AppUrl.baseUrl}/$route");
     return response.data;
   }
 
