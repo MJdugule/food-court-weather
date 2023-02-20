@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.router.dart';
+import 'package:food_weather/core/constants/app_colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() async {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         //title: kAppName,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: AppColors.kGrey,
+          primarySwatch: Colors.red,
         ),
         onGenerateRoute: StackedRouter().onGenerateRoute,
         navigatorKey: StackedService.navigatorKey,

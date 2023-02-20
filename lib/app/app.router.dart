@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:food_weather/feature/cities/cities_view.dart' as _i4;
 import 'package:food_weather/feature/dashboard/dashboard_view.dart' as _i2;
 import 'package:food_weather/feature/startup/carousel_view.dart' as _i3;
+import 'package:food_weather/feature/weather_info/veather_info_viewmodel.dart'
+    as _i5;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i5;
+import 'package:stacked_services/stacked_services.dart' as _i6;
 
 class Routes {
   static const dashBoardView = '/';
@@ -19,10 +21,13 @@ class Routes {
 
   static const citiesView = '/cities-view';
 
+  static const weatherInfoViewModel = '/weather-info-view-model';
+
   static const all = <String>{
     dashBoardView,
     carouselView,
     citiesView,
+    weatherInfoViewModel,
   };
 }
 
@@ -39,6 +44,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.citiesView,
       page: _i4.CitiesView,
+    ),
+    _i1.RouteDef(
+      Routes.weatherInfoViewModel,
+      page: _i5.WeatherInfoViewModel,
     ),
   ];
 
@@ -61,6 +70,12 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i5.WeatherInfoViewModel: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i5.WeatherInfoViewModel(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -69,7 +84,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i5.NavigationService {
+extension NavigatorStateExtension on _i6.NavigationService {
   Future<dynamic> navigateToDashBoardView([
     int? routerId,
     bool preventDuplicates = true,
@@ -112,6 +127,20 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToWeatherInfoViewModel([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.weatherInfoViewModel,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithDashBoardView([
     int? routerId,
     bool preventDuplicates = true,
@@ -148,6 +177,20 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.citiesView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithWeatherInfoViewModel([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.weatherInfoViewModel,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

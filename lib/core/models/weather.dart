@@ -1,6 +1,4 @@
 
-import 'package:dartz/dartz.dart';
-import 'package:food_weather/main.dart';
 
 class WeatherModel  {
   const WeatherModel({

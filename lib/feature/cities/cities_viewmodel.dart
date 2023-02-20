@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.logger.dart';
@@ -20,12 +21,17 @@ class CitiesViewModel extends BaseViewModel {
 
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
+  List<Cities> _city = [];
+  List<Cities> get city => _city;
 
+ Future<List<Cities>> loadCity() async{
+  var input = await File(AppAsset.citiesList).readAsString();
+  List<Cities> cities = jsonDecode(input);
+  _city = cities;
+  return cities;
+ }
 
-  var city = jsonDecode(AppAsset.citiesList) as List;
-  List<Cities> cities = city.map((cityJson) => Cities.fromJson(cityJson)).toList();
-
-   Future createUser({lat, lon}) async {
+   Future getCurrentWeather({lat, lon}) async {
     setBusy(true);
     final response = await _server.getCurrentWeather(
        lat: lat, lon: lon);
@@ -34,6 +40,10 @@ class CitiesViewModel extends BaseViewModel {
       
     }
     setBusy(false);
+  }
+
+  navigateToWeatherInfo(){
+    _navigationService.navigateToView(view)
   }
 
 

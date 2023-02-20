@@ -33,16 +33,16 @@ class Cities {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['city'] = this.city;
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
-    data['country'] = this.country;
-    data['iso2'] = this.iso2;
-    data['admin_name'] = this.adminName;
-    data['capital'] = this.capital;
-    data['population'] = this.population;
-    data['population_proper'] = this.populationProper;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['city'] = city;
+    data['lat'] = lat;
+    data['lng'] = lng;
+    data['country'] = country;
+    data['iso2'] = iso2;
+    data['admin_name'] = adminName;
+    data['capital'] = capital;
+    data['population'] = population;
+    data['population_proper'] = populationProper;
     return data;
   }
 }
