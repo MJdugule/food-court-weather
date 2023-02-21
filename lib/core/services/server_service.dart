@@ -13,7 +13,7 @@ class ServerService {
   final _networkFormatter = locator<NetworkService>();
   final _preferences = locator<SharedPreferencesService>();
 
- Future<Weather> getCurrentWeather({required String lat, required String lon}) async {
+ Future<bool> getCurrentWeather({required String lat, required String lon}) async {
      final response = await _networkFormatter.fmt((){
       return _apiService.get(route: AppUrl.url(lat, lon));
 
@@ -21,7 +21,7 @@ class ServerService {
      return response.fold(
       (l){
       
-      return Future.value() ;
+      return false ;
       }, (r) {
       
       final dataResponse = WeatherModel.fromJson(r);
