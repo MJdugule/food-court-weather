@@ -5,7 +5,7 @@ import 'package:food_weather/core/services/shared_preference_service.dart';
 import 'package:food_weather/feature/cities/cities_view.dart';
 import 'package:food_weather/feature/dashboard/dashboard_view.dart';
 import 'package:food_weather/feature/startup/carousel_view.dart';
-import 'package:food_weather/feature/weather_info/veather_info_viewmodel.dart';
+import 'package:food_weather/feature/weather_info/weather_info_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -14,7 +14,7 @@ import 'package:stacked_services/stacked_services.dart';
     AdaptiveRoute(page: DashBoardView, initial: true),
     AdaptiveRoute(page: CarouselView,),
     AdaptiveRoute(page: CitiesView,),
-    AdaptiveRoute(page: WeatherInfoViewModel,),
+    AdaptiveRoute(page: WeatherInfoView,),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

@@ -23,23 +23,7 @@ class CarouselView extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            body: CarouselSlider.builder(
-                carouselController: CarouselController(),
-                options: CarouselOptions(
-                    onPageChanged: (index, reason) {
-                      model.setCurrentIndex(index);
-                    },
-                    enableInfiniteScroll: false,
-                    viewportFraction: 1,
-                    height: double.infinity,
-                    initialPage: model.currentIndex
-                    // showIndicator: true,
-                    // slideIndicator: CircularSlideIndicator(),
-                    ),
-                itemCount: 2,
-                itemBuilder:
-                    (BuildContext context, int itemIndex, int pageViewIndex) {
-                  return Stack(
+            body: Stack(
                     children: [
                       Image.asset(
                         AppAsset.cloudy,
@@ -62,108 +46,124 @@ class CarouselView extends StatelessWidget {
                                   fontWeight: FontWeight.w300),
                             ),
                             AppSpacing.verticalSpaceLarge,
-                            Card(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 40),
-                              child: Container(
-                                height: 400.h,
-                                width: 300.w,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 15.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Ibadan",
-                                        style: GoogleFonts.lato(
-                                          fontSize: 45,
+                            CarouselSlider.builder(
+                               carouselController: CarouselController(),
+                options: CarouselOptions(
+                    onPageChanged: (index, reason) {
+                      model.setCurrentIndex(index);
+                    },
+                    enableInfiniteScroll: false,
+                    viewportFraction: 0.8,
+                    height: 400.h,
+                                   
+                    //height: double.infinity,
+                    initialPage: model.currentIndex
+                    // showIndicator: true,
+                    // slideIndicator: CircularSlideIndicator(),
+                    ),
+                                      itemCount: 2,
+                itemBuilder:
+                    (BuildContext context, int itemIndex, int pageViewIndex) {
+                                return Card(
+                                  // margin:
+                                  //     const EdgeInsets.symmetric(horizontal: 40),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Ibadan",
+                                          style: GoogleFonts.lato(
+                                            fontSize: 45,
+                                          ),
                                         ),
-                                      ),
-                                      AppSpacing.verticalSpaceMedium,
-                                      Icon(
-                                        Icons.sunny,
-                                        size: 150,
-                                      ),
-                                      AppSpacing.verticalSpaceLarge,
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              // Image.asset('assets/images/wind.png', color: Colors.purpleAccent.shade100, height: 30,),
-                                              AppSpacing.verticalSpaceMedium,
-
-                                              Text(
-                                                "${50}km/h",
-                                                style: GoogleFonts.lato(
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                "Wind",
-                                                style: GoogleFonts.lato(
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              // Image.asset('assets/images/humidity.png', color: Colors.purpleAccent.shade100, height: 20,width: 50, ),
-                                              AppSpacing.verticalSpaceMedium,
-
-                                              Text(
-                                                "${30}%",
-                                                style: GoogleFonts.lato(
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                "Humidity",
-                                                style: GoogleFonts.lato(
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              )
-                                            ],
-                                          ),
-                                          AppSpacing.verticalSpaceMedium,
-                                          Column(
-                                            children: [
-                                              //Image.asset('assets/images/visibility.png', color: Colors.purpleAccent.shade100, height: 30,),
-                                              AppSpacing.verticalSpaceMedium,
-                                              Text(
-                                                "${40}%",
-                                                style: GoogleFonts.lato(
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(
-                                                "Visibility",
-                                                style: GoogleFonts.lato(
-                                                    fontSize: 15.sp,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                                        AppSpacing.verticalSpaceMedium,
+                                        Icon(
+                                          Icons.sunny,
+                                          size: 150,
+                                        ),
+                                        AppSpacing.verticalSpaceLarge,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                // Image.asset('assets/images/wind.png', color: Colors.purpleAccent.shade100, height: 30,),
+                                                AppSpacing.verticalSpaceMedium,
+                            
+                                                Text(
+                                                  "${50}km/h",
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  "Wind",
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Column(
+                                              children: [
+                                                // Image.asset('assets/images/humidity.png', color: Colors.purpleAccent.shade100, height: 20,width: 50, ),
+                                                AppSpacing.verticalSpaceMedium,
+                            
+                                                Text(
+                                                  "${30}%",
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  "Humidity",
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                )
+                                              ],
+                                            ),
+                                            AppSpacing.verticalSpaceMedium,
+                                            Column(
+                                              children: [
+                                                //Image.asset('assets/images/visibility.png', color: Colors.purpleAccent.shade100, height: 30,),
+                                                AppSpacing.verticalSpaceMedium,
+                                                Text(
+                                                  "${40}%",
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  "Visibility",
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
+                                );
+                              }
                             ),
                             AppSpacing.verticalSpaceMassive,
                             Row(
@@ -184,8 +184,8 @@ class CarouselView extends StatelessWidget {
                         ),
                       )
                     ],
-                  );
-                }));
+                  )
+               );
       },
       viewModelBuilder: () => CarouselViewModel(),
     );

@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
-
+import 'package:flutter/services.dart';
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.logger.dart';
+import 'package:food_weather/app/app.router.dart';
 import 'package:food_weather/core/constants/app_asset.dart';
 import 'package:food_weather/core/constants/app_strings.dart';
 import 'package:food_weather/core/models/cities.dart';
@@ -24,10 +24,13 @@ class CitiesViewModel extends BaseViewModel {
   List<Cities> _city = [];
   List<Cities> get city => _city;
 
- Future<List<Cities>> loadCity() async{
-  var input = await File(AppAsset.citiesList).readAsString();
-  List<Cities> cities = jsonDecode(input);
+ Future loadCity() async{
+  var response = await rootBundle.loadString(AppAsset.citiesList);
+  List<Cities> cities = List<Cities>.from(json.decode(response).map((profile) => Cities.fromJson(profile)));
+ 
   _city = cities;
+  notifyListeners();
+  
   return cities;
  }
 
@@ -42,8 +45,8 @@ class CitiesViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  navigateToWeatherInfo(){
-    _navigationService.navigateToView(view)
+  void navigateToWeatherInfo({lat, lon}){
+    _navigationService.navigateTo(Routes.weatherInfoView, arguments: WeatherInfoViewArguments(lat: lat, lon: lon));
   }
 
 

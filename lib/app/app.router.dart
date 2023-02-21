@@ -5,14 +5,15 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/material.dart' as _i6;
 import 'package:flutter/material.dart';
 import 'package:food_weather/feature/cities/cities_view.dart' as _i4;
 import 'package:food_weather/feature/dashboard/dashboard_view.dart' as _i2;
 import 'package:food_weather/feature/startup/carousel_view.dart' as _i3;
-import 'package:food_weather/feature/weather_info/veather_info_viewmodel.dart'
+import 'package:food_weather/feature/weather_info/weather_info_view.dart'
     as _i5;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i6;
+import 'package:stacked_services/stacked_services.dart' as _i7;
 
 class Routes {
   static const dashBoardView = '/';
@@ -21,13 +22,13 @@ class Routes {
 
   static const citiesView = '/cities-view';
 
-  static const weatherInfoViewModel = '/weather-info-view-model';
+  static const weatherInfoView = '/weather-info-view';
 
   static const all = <String>{
     dashBoardView,
     carouselView,
     citiesView,
-    weatherInfoViewModel,
+    weatherInfoView,
   };
 }
 
@@ -46,8 +47,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i4.CitiesView,
     ),
     _i1.RouteDef(
-      Routes.weatherInfoViewModel,
-      page: _i5.WeatherInfoViewModel,
+      Routes.weatherInfoView,
+      page: _i5.WeatherInfoView,
     ),
   ];
 
@@ -70,9 +71,11 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i5.WeatherInfoViewModel: (data) {
+    _i5.WeatherInfoView: (data) {
+      final args = data.getArgs<WeatherInfoViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i5.WeatherInfoViewModel(),
+        builder: (context) =>
+            _i5.WeatherInfoView(key: args.key, lat: args.lat, lon: args.lon),
         settings: data,
       );
     },
@@ -84,7 +87,21 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i6.NavigationService {
+class WeatherInfoViewArguments {
+  const WeatherInfoViewArguments({
+    this.key,
+    required this.lat,
+    required this.lon,
+  });
+
+  final _i6.Key? key;
+
+  final String lat;
+
+  final String lon;
+}
+
+extension NavigatorStateExtension on _i7.NavigationService {
   Future<dynamic> navigateToDashBoardView([
     int? routerId,
     bool preventDuplicates = true,
@@ -127,14 +144,18 @@ extension NavigatorStateExtension on _i6.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToWeatherInfoViewModel([
+  Future<dynamic> navigateToWeatherInfoView({
+    _i6.Key? key,
+    required String lat,
+    required String lon,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.weatherInfoViewModel,
+  }) async {
+    return navigateTo<dynamic>(Routes.weatherInfoView,
+        arguments: WeatherInfoViewArguments(key: key, lat: lat, lon: lon),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -183,14 +204,18 @@ extension NavigatorStateExtension on _i6.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithWeatherInfoViewModel([
+  Future<dynamic> replaceWithWeatherInfoView({
+    _i6.Key? key,
+    required String lat,
+    required String lon,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.weatherInfoViewModel,
+  }) async {
+    return replaceWith<dynamic>(Routes.weatherInfoView,
+        arguments: WeatherInfoViewArguments(key: key, lat: lat, lon: lon),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

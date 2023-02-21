@@ -17,8 +17,12 @@ class ServerService {
       return _apiService.get(route: AppUrl.url(lat, lon));
 
      });
-     return response.fold((l) => false, (r) {
-      final dataResponse = Weather.fromJson(r);
+     return response.fold(
+      (l){
+      
+      return false;}, (r) {
+      
+      final dataResponse = WeatherModel.fromJson(r);
       _log.v("Server created : $dataResponse");
       return true;
     });

@@ -68,19 +68,6 @@ class APIService {
     return response.data;
   }
 
-  Future<dynamic> post2({
-    required String route,
-    required String body,
-  }) async {
-    log.v("posting $body fro $route");
-    var response = await dio.post(
-      route,
-      data:jsonEncode(body),
-    );
-    log.v("posting ${response.data} from ${AppUrl.baseUrl}/$route");
-    return response.data;
-  }
-
   Future<dynamic> put(
     String route,
     Map<String, String> body,

@@ -4,7 +4,7 @@ class WeatherModel  {
   const WeatherModel({
     required List<Weather> weather,
     required Main main,
-    required Sys sys,
+    //required Sys sys,
     required int timezone,
     required int id,
     required String name,
@@ -24,7 +24,7 @@ class WeatherModel  {
 
       main: Main.fromJson(json['main']),
 
-      sys: Sys.fromJson(json['sys']),
+     // sys: Sys.fromJson(json['sys']),
       timezone: json['timezone'],
       id: json['id'],
       name: json['name'],
