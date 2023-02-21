@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.logger.dart';
 import 'package:food_weather/core/models/weather.dart';
@@ -15,13 +16,12 @@ class WeatherInfoViewModel extends BaseViewModel{
    Weather? weather;
 
    final log = getLogger("CarouselViewModel");
-
-   Future getCurrentWeather({required String lat, required String lon}) async {
+Weather? weatherInfo; 
+   Future<Weather> getCurrentWeather({required String lat, required String lon}) async {
      final response = await _server.getCurrentWeather(lat: lat, lon: lon);
-
-  if(response == true){
-return ;
+weatherInfo = response;
+  return response;
   }
    
-  }
+
 }
