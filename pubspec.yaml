@@ -1,0 +1,84 @@
+name: food_weather
+description: A new Flutter project.
+
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # ui
+  google_fonts: ^3.0.1
+  font_awesome_flutter: ^10.3.0
+  flutter_screenutil: ^5.6.0
+  flutter_otp_text_field: ^1.1.1
+  carousel_slider: ^4.2.1
+  
+  # state management
+  stacked: ^3.0.1
+  stacked_services: ^0.9.9
+
+  # api
+  dio: 4.0.6
+  dartz: 0.10.1
+  internet_connection_checker: ^1.0.0+1
+
+  # lottie animation
+  lottie: ^2.1.0
+
+  # Data Models
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.7.0
+  equatable: ^2.0.5
+
+  # Local storage
+  shared_preferences: ^2.0.15
+  hive_flutter:
+
+  #permission handler
+  permission_handler:
+
+  #location
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+
+
+  cupertino_icons: ^1.0.2
+  hive:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Generators
+  build_runner: ^2.3.3
+  stacked_generator: ^0.8.0+1
+  hive_generator:
+
+  # data models
+  freezed: ^2.3.2
+  json_serializable: ^6.5.4
+  flutter_lints: ^2.0.0
+
+
+  flutter_launcher_icons: "^0.11.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  min_sdk_android: 21
+
+
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/json/
