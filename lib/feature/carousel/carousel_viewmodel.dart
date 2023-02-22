@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.logger.dart';
@@ -8,12 +7,10 @@ import 'package:food_weather/core/constants/app_asset.dart';
 import 'package:food_weather/core/models/cities.dart';
 import 'package:food_weather/core/models/weather.dart';
 import 'package:food_weather/core/services/server_service.dart';
-import 'package:food_weather/core/services/shared_preference_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class CarouselViewModel extends BaseViewModel {
-  final _preferences = locator<SharedPreferencesService>();
    final _server = locator<ServerService>();
    final _dialog = locator<DialogService>();
    final _navigator = locator<NavigationService>();
@@ -22,6 +19,7 @@ class CarouselViewModel extends BaseViewModel {
    
 
   int _currentIndex = 0;
+ 
    final List<WeatherModel> _carouselWeather = [];
   List<WeatherModel> get carouselWeather => _carouselWeather;
   int get currentIndex => _currentIndex;
@@ -44,14 +42,17 @@ class CarouselViewModel extends BaseViewModel {
     setBusy(true);
     await loadCity();
     if(carouselWeather.isEmpty){
+    
       
      final response = await _server.getCurrentWeather(lat: "6.4500", lon: "3.4000", name: "Lagos");
      if(response!=null){
+     
+
       carouselWeather.add(response);
+
       notifyListeners();
-     _preferences.saveData("cachedWeathers", carouselWeather);
-     var savedList = await _preferences.getData("cachedWeathers");
-     print(savedList);
+     
+     
     //_carouselWeather = savedList;
       weatherInfo = response;
      }
@@ -62,15 +63,15 @@ setBusy(false);
 
  void addCity({lat, lon, name})async{
   setBusy(true);
+   _navigator.back();
   final response = await _server.getCurrentWeather(lat: lat, lon: lon, name: name);
-  _navigator.back();
+ 
      if(response!=null){
+      
       carouselWeather.add(response);
-      print(carouselWeather[2].name);
+      //print(carouselWeather[2].name);
       notifyListeners();
-     _preferences.saveData("cachedWeathers", carouselWeather);
-     var savedList = await _preferences.getData("cachedWeathers");
-     print(savedList);
+    // _preferences.saveData("cachedWeathers", carouselWeather);
     //_carouselWeather = savedList;
       weatherInfo = response;
      }
@@ -78,10 +79,15 @@ setBusy(false);
  }
 
 Future remove(int index)async{
- 
+ if(index == 0){
+
+ }else{
   DialogResponse? response = await _dialog.showDialog(title: "Remove?", buttonTitle: "Yes", cancelTitle: "No",);
   if(response!.confirmed == true){
+  
 carouselWeather.removeAt(index);
+_currentIndex = index-1;
+  }
   }
   
   notifyListeners();
