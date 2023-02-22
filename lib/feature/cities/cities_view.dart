@@ -16,6 +16,7 @@ class CitiesView extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: const Text("Cities"),
@@ -24,7 +25,7 @@ class CitiesView extends StatelessWidget {
               itemCount: model.city.length,
               itemBuilder: (context, index) {
             return CitiesWidget(
-              onTap: (){model.navigateToWeatherInfo(lat: model.city[index].lat, lon: model.city[index].lng);},
+              onTap: (){model.navigateToWeatherInfo(lat: model.city[index].lat, lon: model.city[index].lng, name: model.city[index].city!);},
               name: model.city[index].city!);
               },
             ),

@@ -34,10 +34,10 @@ class CitiesViewModel extends BaseViewModel {
   return cities;
  }
 
-   Future getCurrentWeather({lat, lon}) async {
+   Future getCurrentWeather({lat, lon, name}) async {
     setBusy(true);
     final response = await _server.getCurrentWeather(
-       lat: lat, lon: lon);
+       lat: lat, lon: lon, name: name);
     if (response == true) {
       _preferences.saveData(AppString.cachedWeather, response);
       
@@ -45,8 +45,8 @@ class CitiesViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void navigateToWeatherInfo({lat, lon}){
-    _navigationService.navigateTo(Routes.weatherInfoView, arguments: WeatherInfoViewArguments(lat: lat, lon: lon));
+  void navigateToWeatherInfo({lat, lon, name}){
+    _navigationService.navigateTo(Routes.weatherInfoView, arguments: WeatherInfoViewArguments(lat: lat, lon: lon, name: name));
   }
 
 

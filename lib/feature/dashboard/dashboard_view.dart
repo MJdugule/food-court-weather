@@ -14,8 +14,9 @@ class DashBoardView extends StatelessWidget {
           body: model.getView(model.currentIndex),
           bottomNavigationBar: BottomNavigationBar(
             selectedFontSize: 0,
-            iconSize: 33,
-            selectedIconTheme: const IconThemeData(color: AppColors.kWhite),
+            iconSize: 30,
+            selectedIconTheme:  IconThemeData(color: Colors.yellow.shade800) ,
+            unselectedIconTheme: const IconThemeData(color: AppColors.kWhite) ,
             type: BottomNavigationBarType.fixed,
             backgroundColor: AppColors.kGrey,
             currentIndex: model.currentIndex,

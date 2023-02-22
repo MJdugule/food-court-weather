@@ -4,27 +4,24 @@ import 'package:food_weather/core/constants/app_asset.dart';
 import 'package:food_weather/core/constants/app_colors.dart';
 import 'package:food_weather/core/constants/app_spacing.dart';
 import 'package:food_weather/core/utils/enums.dart';
-import 'package:food_weather/feature/weather_info/veather_info_viewmodel.dart';
+import 'package:food_weather/feature/current_weather/current_weather_viewmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
-class WeatherInfoView extends StatefulWidget {
-  final String lat;
-  final String lon;
-  final String name;
-  const WeatherInfoView({super.key, required this.lat, required this.lon, required this.name});
+class CurrentWeatherView extends StatefulWidget {
+  const CurrentWeatherView({super.key});
 
   @override
-  State<WeatherInfoView> createState() => _WeatherInfoViewState();
+  State<CurrentWeatherView> createState() => _CurrentWeatherViewState();
 }
 
-class _WeatherInfoViewState extends State<WeatherInfoView> {
+class _CurrentWeatherViewState extends State<CurrentWeatherView> {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<WeatherInfoViewModel>.reactive(
-        viewModelBuilder: () => WeatherInfoViewModel(),
+    return ViewModelBuilder<CurrentWeatherViewModel>.reactive(
+        viewModelBuilder: () => CurrentWeatherViewModel(),
         onViewModelReady: (viewModel) {
-          viewModel.getCurrentWeather(lat: widget.lat , lon: widget.lat, name: widget.name);
+          viewModel.getCurrentWeather();
         },
         builder: (context, model, child) {
           return Scaffold(
@@ -40,7 +37,7 @@ class _WeatherInfoViewState extends State<WeatherInfoView> {
                         width: double.infinity,
                       
                       ),
-                      Container(decoration: BoxDecoration(color: AppColors.kGrey.withOpacity(0.2))),
+                      Container(decoration: BoxDecoration(color: AppColors.kGrey.withOpacity(0.3))),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Column(
@@ -58,7 +55,7 @@ class _WeatherInfoViewState extends State<WeatherInfoView> {
                             const Divider(color: AppColors.kWhite, thickness: 1,),
                             Text(
                                model.weatherInfo!.weather![0].main == WeatherEnum.cloudy.weather? "Cloudy ": model.weatherInfo!.weather!.first.main == WeatherEnum.sunny.weather 
-                    ? "Clear Sky" :  model.weatherInfo!.weather![0].main == WeatherEnum.clear.weather ? "Clear Sky"
+                    ? "Clear Sky" :  model.weatherInfo!.weather![0].main == WeatherEnum.clear.weather ? "ClearSky"
                     : "Rainy",
                               style: GoogleFonts.lato(
                                   color: AppColors.kWhite,
@@ -66,9 +63,9 @@ class _WeatherInfoViewState extends State<WeatherInfoView> {
                                   fontWeight: FontWeight.w300),
                             ),
                             AppSpacing.verticalSpaceLarge,
-                            InfoCard(name: widget.name, weather: model.weatherInfo!,),
+                            InfoCard(name: model.weatherInfo!.name.toString(), weather: model.weatherInfo!,),
                            
-                           
+                          
                           
                           ],
                         ),

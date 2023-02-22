@@ -39,6 +39,9 @@ dependencies:
   # Local storage
   shared_preferences: ^2.0.15
 
+  #permission handler
+  permission_handler:
+
   #location
   geolocator: ^9.0.2
   geocoding: ^2.0.5

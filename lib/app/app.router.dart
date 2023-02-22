@@ -7,9 +7,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart' as _i6;
 import 'package:flutter/material.dart';
+import 'package:food_weather/feature/carousel/carousel_view.dart' as _i3;
 import 'package:food_weather/feature/cities/cities_view.dart' as _i4;
 import 'package:food_weather/feature/dashboard/dashboard_view.dart' as _i2;
-import 'package:food_weather/feature/startup/carousel_view.dart' as _i3;
 import 'package:food_weather/feature/weather_info/weather_info_view.dart'
     as _i5;
 import 'package:stacked/stacked.dart' as _i1;
@@ -74,8 +74,8 @@ class StackedRouter extends _i1.RouterBase {
     _i5.WeatherInfoView: (data) {
       final args = data.getArgs<WeatherInfoViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            _i5.WeatherInfoView(key: args.key, lat: args.lat, lon: args.lon),
+        builder: (context) => _i5.WeatherInfoView(
+            key: args.key, lat: args.lat, lon: args.lon, name: args.name),
         settings: data,
       );
     },
@@ -92,6 +92,7 @@ class WeatherInfoViewArguments {
     this.key,
     required this.lat,
     required this.lon,
+    required this.name,
   });
 
   final _i6.Key? key;
@@ -99,6 +100,8 @@ class WeatherInfoViewArguments {
   final String lat;
 
   final String lon;
+
+  final String name;
 }
 
 extension NavigatorStateExtension on _i7.NavigationService {
@@ -148,6 +151,7 @@ extension NavigatorStateExtension on _i7.NavigationService {
     _i6.Key? key,
     required String lat,
     required String lon,
+    required String name,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -155,7 +159,8 @@ extension NavigatorStateExtension on _i7.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.weatherInfoView,
-        arguments: WeatherInfoViewArguments(key: key, lat: lat, lon: lon),
+        arguments:
+            WeatherInfoViewArguments(key: key, lat: lat, lon: lon, name: name),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -208,6 +213,7 @@ extension NavigatorStateExtension on _i7.NavigationService {
     _i6.Key? key,
     required String lat,
     required String lon,
+    required String name,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -215,7 +221,8 @@ extension NavigatorStateExtension on _i7.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.weatherInfoView,
-        arguments: WeatherInfoViewArguments(key: key, lat: lat, lon: lon),
+        arguments:
+            WeatherInfoViewArguments(key: key, lat: lat, lon: lon, name: name),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

@@ -1,15 +1,21 @@
 
 
 class WeatherModel  {
-  const WeatherModel({
-    required List<Weather> weather,
-    required Main main,
-    //required Sys sys,
-    required int timezone,
-    required int id,
-    required String name,
-    required int cod,
-  });
+  int? id;
+  Main? main;
+  String? description;
+  String? icon;
+  List<Weather>? weather;
+  int? timezone;
+  int? cod;
+  String? name;
+  Wind? wind;
+  int? visibility;
+
+
+  WeatherModel({this.wind, this.visibility, this.name, this.timezone, this.cod, this.weather, this.main, this.id, this.description, this.icon});
+
+  
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     return WeatherModel(
@@ -23,7 +29,8 @@ class WeatherModel  {
       // },
 
       main: Main.fromJson(json['main']),
-
+wind: json['wind'] != null ? Wind.fromJson(json['wind']) : null,
+    visibility: json['visibility'],
      // sys: Sys.fromJson(json['sys']),
       timezone: json['timezone'],
       id: json['id'],
@@ -34,13 +41,31 @@ class WeatherModel  {
 
 }
 
+class Wind {
+  double? speed;
+  int? deg;
+  double? gust;
+
+  Wind({this.speed, this.deg, this.gust});
+
+  Wind.fromJson(Map<String, dynamic> json) {
+    speed = json['speed'];
+    deg = json['deg'];
+    gust = json['gust'];
+  }
+
+ 
+}
+
 class Weather{
-  Weather({
-    required int id,
-    required String main,
-    required String description,
-    required String icon,
-  });
+ int? id;
+  String? main;
+  String? description;
+  String? icon;
+
+  Weather({this.id, this.main, this.description, this.icon});
+
+ 
 
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
@@ -55,49 +80,56 @@ class Weather{
 }
 
 class Main {
-  Main({
-    required double temp,
-    
-    required double tempMin,
-    required double tempMax,
-    required int pressure,
-    required int humidity,
-   
-    
-  });
+ double? temp;
 
-  factory Main.fromJson(Map<String, dynamic> json) {
-    return Main(
-        temp: json['temp'],
-        
-        tempMin: json['temp_min'],
-        tempMax: json['temp_max'],
-        pressure: json['pressure'],
-        humidity: json['humidity'],
-        
-       );
+  int? humidity;
+  double? tempKf;
+
+  Main(
+      {this.temp,
+     
+      this.humidity,
+      this.tempKf});
+
+  Main.fromJson(Map<String, dynamic> json) {
+    temp = json['temp'];
+    
+    humidity = json['humidity'];
+    tempKf = json['temp_kf'];
   }
 
 
 }
 
-class Sys {
-  Sys(
-      {required int type,
-      required int id,
-      required String country,
-      required int sunrise,
-      required int sunset});
-    
 
-  factory Sys.fromJson(Map<String, dynamic> json) {
-    return Sys(
-      type: json['type'],
-      id: json['id'],
-      country: json['country'],
-      sunrise: json['sunrise'],
-      sunset: json['sunset'],
-    );
+
+class Sys {
+
+      String? name;
+  
+  String? country;
+  int? population;
+  int? timezone;
+  int? sunrise;
+  int? sunset;
+
+  Sys(
+      {
+      this.name,
+      
+      this.country,
+      this.population,
+      this.timezone,
+      this.sunrise,
+      this.sunset});
+
+  Sys.fromJson(Map<String, dynamic> json) {
+ 
+    name = json['name'];
+    
+    country = json['country'];
+    population = json['population'];
+    
   }
 
 }

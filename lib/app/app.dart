@@ -4,7 +4,7 @@ import 'package:food_weather/core/services/server_service.dart';
 import 'package:food_weather/core/services/shared_preference_service.dart';
 import 'package:food_weather/feature/cities/cities_view.dart';
 import 'package:food_weather/feature/dashboard/dashboard_view.dart';
-import 'package:food_weather/feature/startup/carousel_view.dart';
+import 'package:food_weather/feature/carousel/carousel_view.dart';
 import 'package:food_weather/feature/weather_info/weather_info_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -19,6 +19,7 @@ import 'package:stacked_services/stacked_services.dart';
   dependencies: [
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: DialogService),
+    LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: SnackbarService),
 
     // network
