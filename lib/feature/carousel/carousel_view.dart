@@ -101,7 +101,7 @@ class CarouselView extends StatelessWidget {
                                 : CarouselSlider.builder(
                                     carouselController: CarouselController(),
                                     options: CarouselOptions(
-                                      scrollPhysics: BouncingScrollPhysics(),
+                                      scrollPhysics: const BouncingScrollPhysics(),
                                         onPageChanged: (index, reason) {
                                          
                                           model.setCurrentIndex(index);
