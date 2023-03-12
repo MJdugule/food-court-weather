@@ -62,11 +62,10 @@ setBusy(false);
 
  void addCity({lat, lon, name})async{
   setBusy(true);
-  final response = await _server.getCurrentWeather(lat: lat, lon: lon, name: name);
+  final response = await _server.getCurrentWeather(lat: lat, lon: lon, name: "Lagos");
   _navigator.back();
      if(response!=null){
       carouselWeather.add(response);
-      print(carouselWeather[2].name);
       notifyListeners();
      _preferences.saveData("cachedWeathers", carouselWeather);
      var savedList = await _preferences.getData("cachedWeathers");
