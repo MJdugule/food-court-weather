@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.logger.dart';
@@ -50,8 +49,6 @@ class CarouselViewModel extends BaseViewModel {
       carouselWeather.add(response);
       notifyListeners();
      _preferences.saveData("cachedWeathers", carouselWeather);
-     var savedList = await _preferences.getData("cachedWeathers");
-     print(savedList);
     //_carouselWeather = savedList;
       weatherInfo = response;
      }
@@ -68,8 +65,6 @@ setBusy(false);
       carouselWeather.add(response);
       notifyListeners();
      _preferences.saveData("cachedWeathers", carouselWeather);
-     var savedList = await _preferences.getData("cachedWeathers");
-     print(savedList);
     //_carouselWeather = savedList;
       weatherInfo = response;
      }

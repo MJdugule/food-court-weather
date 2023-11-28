@@ -3,11 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_weather/app/app.locator.dart';
 import 'package:food_weather/app/app.router.dart';
 import 'package:food_weather/core/constants/app_colors.dart';
+import 'package:food_weather/core/models/weather.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
+   Hive.registerAdapter(WeatherModelAdapter());
   runApp(const MyApp());
 }
 

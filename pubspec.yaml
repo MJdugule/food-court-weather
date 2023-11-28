@@ -38,6 +38,7 @@ dependencies:
 
   # Local storage
   shared_preferences: ^2.0.15
+  hive_flutter:
 
   #permission handler
   permission_handler:
@@ -48,6 +49,7 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+  hive:
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +58,7 @@ dev_dependencies:
   # Generators
   build_runner: ^2.3.3
   stacked_generator: ^0.8.0+1
+  hive_generator:
 
   # data models
   freezed: ^2.3.2

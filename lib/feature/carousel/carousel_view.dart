@@ -7,8 +7,6 @@ import 'package:food_weather/core/constants/app_colors.dart';
 import 'package:food_weather/core/constants/app_spacing.dart';
 import 'package:food_weather/core/utils/enums.dart';
 import 'package:food_weather/feature/carousel/carousel_viewmodel.dart';
-import 'package:food_weather/feature/carousel/widget/circle_indicator.dart';
-import 'package:food_weather/feature/cities/cities_view.dart';
 import 'package:food_weather/feature/cities/widget/list_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -21,6 +19,7 @@ class CarouselView extends StatelessWidget {
     return ViewModelBuilder<CarouselViewModel>.reactive(
       onViewModelReady: (model) => model.init(),
       builder: (context, model, child) {
+      
         return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -31,14 +30,14 @@ class CarouselView extends StatelessWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : Stack(
                     children: [
-                      Image.asset(
-                        model.weatherInfo!.weather![0].main ==
+                    model.carouselWeather.isEmpty ? Container():  Image.asset(
+                        model.carouselWeather[model.currentIndex].weather!.first.main ==
                                 WeatherEnum.cloudy.weather
                             ? AppAsset.cloudy
-                            : model.weatherInfo!.weather!.first.main ==
+                            : model.carouselWeather[model.currentIndex].weather!.first.main ==
                                     WeatherEnum.sunny.weather
                                 ? AppAsset.clearSky
-                                : model.weatherInfo!.weather![0].main ==
+                                :model.carouselWeather[model.currentIndex].weather!.first.main ==
                                         WeatherEnum.clear.weather
                                     ? AppAsset.clearSky
                                     : AppAsset.rainny,
@@ -52,6 +51,8 @@ class CarouselView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: ListView(
+                          scrollDirection: Axis.vertical,
+                          physics: const BouncingScrollPhysics(),
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           // mainAxisAlignment: MainAxisAlignment.start,
@@ -59,25 +60,25 @@ class CarouselView extends StatelessWidget {
                           children: [
                             AppSpacing.verticalSpaceRegular,
                             AppSpacing.verticalSpaceRegular,
-                            Text(
-                              "${model.weatherInfo!.main!.temp}\u2103",
+                            model.carouselWeather.isEmpty ? Container(): Text(
+                              "${model.carouselWeather[model.currentIndex].main!.temp}\u2103",
                               style: GoogleFonts.lato(
                                   color: AppColors.kWhite,
                                   fontSize: 75,
                                   fontWeight: FontWeight.w300),
                             ),
-                            const Divider(
+                            model.carouselWeather.isEmpty ? Container(): const Divider(
                               color: AppColors.kWhite,
                               thickness: 1,
                             ),
-                            Text(
-                              model.weatherInfo!.weather![0].main ==
+                            model.carouselWeather.isEmpty ? Container(): Text(
+                              model.carouselWeather[model.currentIndex].weather!.first.main ==
                                       WeatherEnum.cloudy.weather
                                   ? "Cloudy "
-                                  : model.weatherInfo!.weather!.first.main ==
+                                  : model.carouselWeather[model.currentIndex].weather!.first.main ==
                                           WeatherEnum.sunny.weather
                                       ? "Clear Sky"
-                                      : model.weatherInfo!.weather![0].main ==
+                                      : model.carouselWeather[model.currentIndex].weather!.first.main ==
                                               WeatherEnum.clear.weather
                                           ? "ClearSky"
                                           : "Rainy",
@@ -100,9 +101,12 @@ class CarouselView extends StatelessWidget {
                                 : CarouselSlider.builder(
                                     carouselController: CarouselController(),
                                     options: CarouselOptions(
+                                      scrollPhysics: const BouncingScrollPhysics(),
                                         onPageChanged: (index, reason) {
+                                         
                                           model.setCurrentIndex(index);
                                         },
+                                        scrollDirection: Axis.horizontal,
                                         enableInfiniteScroll: false,
                                         viewportFraction: 0.85,
                                         height: 440.h,
@@ -115,14 +119,16 @@ class CarouselView extends StatelessWidget {
                                     itemCount: model.carouselWeather.length,
                                     itemBuilder: (BuildContext context,
                                         int itemIndex, int pageViewIndex) {
-                                      return GestureDetector(
+                                      return
+                                       GestureDetector(
                                           onLongPress: () {
                                             model.remove(itemIndex);
                                           },
-                                          child: InfoCard(
-                                            name: model.weatherInfo!.name
+                                          child: 
+                                          InfoCard(
+                                            name: model.carouselWeather[itemIndex].name
                                                 .toString(),
-                                            weather: model.weatherInfo!,
+                                            weather: model.carouselWeather[itemIndex],
                                           ));
                                     }),
 

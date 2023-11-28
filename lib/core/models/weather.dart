@@ -1,15 +1,26 @@
 
 
+import 'package:hive/hive.dart';
+part 'weather.g.dart';
+
+
+@HiveType(typeId: 1)
 class WeatherModel  {
   int? id;
+  @HiveField(0)
   Main? main;
+  @HiveField(1)
   String? description;
   String? icon;
+  @HiveField(2)
   List<Weather>? weather;
   int? timezone;
   int? cod;
+  @HiveField(3)
   String? name;
+  @HiveField(4)
   Wind? wind;
+  @HiveField(5)
   int? visibility;
 
 
@@ -40,9 +51,10 @@ wind: json['wind'] != null ? Wind.fromJson(json['wind']) : null,
   }
 
 }
-
+@HiveType(typeId: 2)
 class Wind {
   double? speed;
+    @HiveField(0)
   int? deg;
   double? gust;
 
@@ -56,11 +68,15 @@ class Wind {
 
  
 }
-
+@HiveType(typeId: 2)
 class Weather{
+   @HiveField(0)
  int? id;
+  @HiveField(1)
   String? main;
+   @HiveField(2)
   String? description;
+   @HiveField(3)
   String? icon;
 
   Weather({this.id, this.main, this.description, this.icon});
@@ -78,10 +94,11 @@ class Weather{
 
 
 }
-
+@HiveType(typeId: 3)
 class Main {
+  @HiveField(0)
  double? temp;
-
+@HiveField(1)
   int? humidity;
   double? tempKf;
 
